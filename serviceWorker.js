@@ -9,19 +9,17 @@ self.addEventListener('install', () => {
 
 self.addEventListener('push', function (event) {
 	logger.log('Push message received.')
-    logger.log(event.data);
 	const options = {
 		...{
 			title: 'SIへようこそ',
-			body: 'クリックするとコーポレートサイトに飛びます',
-			tag: 'web-push-study-notification',
+			body: `クリックするとコーポレートサイトに飛びます`,
+			tag: `${Math.random()}`,
 			data: {
 				url: 'https://www.sint.co.jp',
 			},
 		}, ...event.data.json()
 	}
-	console.log({options})
-	event.waitUntil(self.registration.showNotification(options.title, options))
+	event.waitUntil(self.registration.showNotification(options.title, options));
 })
 
 self.addEventListener('notificationclick', function (event) {
